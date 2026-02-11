@@ -37,7 +37,7 @@ cat cron-bark-notification/SKILL.md
 Configure Bark server in your OpenClaw TOOLS.md:
 
 ```markdown
-### Bark 推送
+### Bark Push
 - base_url: 192.168.x.x:13001
 - key: your-api-key
 - icon: https://example.com/icon.png
