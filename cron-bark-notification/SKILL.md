@@ -35,7 +35,7 @@ Use `announce` mode + `bestEffort: true`, allowing missing delivery target witho
 
 ### "cron delivery target is missing"
 
-使用 `bestEffort: true` 可以忽略此错误，不影响任务执行。
+Use `bestEffort: true` to ignore this error without affecting task execution.
 
 ### No Bark notification received after task execution
 
