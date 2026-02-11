@@ -36,7 +36,7 @@ BARK_GROUP="MyApp"
 
 **Option 1: Write to TOOLS.md**
 ```markdown
-### Bark 推送
+### Bark Push
 - base_url: https://api.day.app
 - key: 你的Bark设备key
 ```
@@ -44,14 +44,14 @@ BARK_GROUP="MyApp"
 **Option 2: Environment variables**
 ```bash
 export BARK_BASE_URL="https://api.day.app"
-export BARK_KEY="你的Bark设备key"
+export BARK_KEY="your_Bark_device_key"
 ```
 
 **Option 3: .env file (workspace)**
-在 OpenClaw 工作目录创建 `.env` 文件：
+Create `.env` file in OpenClaw workspace directory:
 ```bash
 BARK_BASE_URL="https://api.day.app"
-BARK_KEY="你的Bark设备key"
+BARK_KEY="your_Bark_device_key"
 BARK_ICON="https://example.com/icon.png"
 BARK_GROUP="MyApp"
 ```
