@@ -1,94 +1,94 @@
 # Send Bark Message Skill
 
-通过 Bark API 向 iOS 设备发送推送通知，支持 Markdown 格式。
+Send push notifications to iOS devices via Bark API with Markdown support.
 
-## 功能特性
+## Features
 
-- ✅ POST 请求发送通知
-- ✅ Markdown 格式支持（标题、加粗、斜体、列表等）
-- ✅ 丰富的自定义选项（图标、铃声、分组、URL 跳转等）
-- ✅ 通知优先级设置
-- ✅ 历史记录保存
+- ✅ POST request notifications
+- ✅ Markdown formatting (title, bold, italic, lists, etc.)
+- ✅ Rich customization options (icon, sound, group, URL, etc.)
+- ✅ Notification priority levels
+- ✅ History archive
 
-## 配置方法
+## Configuration
 
-### 方式一：写入 TOOLS.md
+### Method 1: Write to TOOLS.md
 
-在工作区创建或编辑 `TOOLS.md`：
+Create or edit `TOOLS.md` in your workspace:
 
 ```markdown
-### Bark 推送
+### Bark Push
 - base_url: https://api.day.app
-- key: 你的Bark设备key
+- key: your_Bark_device_key
 ```
 
-### 方式二：环境变量
+### Method 2: Environment Variables
 
 ```bash
 export BARK_BASE_URL="https://api.day.app"
-export BARK_KEY="你的Bark设备key"
+export BARK_KEY="your_Bark_device_key"
 ```
 
-#### 可选配置
+#### Optional Configuration
 
-| 环境变量 | 说明 | 默认值 |
-|----------|------|--------|
-| `BARK_ICON` | 默认通知图标 URL | OpenClaw 头像 |
-| `BARK_GROUP` | 默认通知分组 | OpenClaw |
+| Environment Variable | Description | Default |
+|----------------------|-------------|---------|
+| `BARK_ICON` | Default notification icon URL | OpenClaw avatar |
+| `BARK_GROUP` | Default notification group | OpenClaw |
 
 ```bash
 export BARK_BASE_URL="https://api.day.app"
-export BARK_KEY="你的Bark设备key"
+export BARK_KEY="your_Bark_device_key"
 export BARK_ICON="https://example.com/icon.png"
-export BARK_GROUP="我的应用"
+export BARK_GROUP="MyApp"
 ```
 
-### 获取 Key
+### Getting Your Key
 
-1. 打开 Bark App
-2. 点击右上角「复制测试URL」
-3. URL 格式示例：`https://api.day.app/xxxxxxxxxxxx`
+1. Open Bark App
+2. Tap "Copy Test URL" in the top right
+3. URL format: `https://api.day.app/xxxxxxxxxxxx`
    - `base_url` → `https://api.day.app`
    - `key` → `xxxxxxxxxxxx`
 
-## 使用示例
+## Usage Examples
 
-### 简单通知
+### Simple Notification
 
 ```bash
-curl -X "POST" "https://api.day.app/你的key" \
+curl -X "POST" "https://api.day.app/your_key" \
   -H 'Content-Type: application/json' \
   -d '{"body": "Hello from Bark!"}'
 ```
 
-### 带标题
+### With Title
 
 ```bash
-curl -X "POST" "https://api.day.app/你的key" \
+curl -X "POST" "https://api.day.app/your_key" \
   -H 'Content-Type: application/json' \
-  -d '{"title": "提醒", "body": "这是一条通知"}'
+  -d '{"title": "Reminder", "body": "This is a notification"}'
 ```
 
-### Markdown 格式
+### Markdown Format
 
 ```bash
-curl -X "POST" "https://api.day.app/你的key" \
+curl -X "POST" "https://api.day.app/your_key" \
   -H 'Content-Type: application/json' \
   -d '{
-    "title": "日报摘要",
-    "markdown": "## 今日完成\n\n- [x] 任务 A\n- [x] 任务 B\n\n**总计**: 5 个任务"
+    "title": "Daily Summary",
+    "markdown": "## Completed Today\n\n- [x] Task A\n- [x] Task B\n\n**Total**: 5 tasks"
   }'
 ```
 
-### 完整参数
+### Full Parameters
 
 ```bash
-curl -X "POST" "https://api.day.app/你的key" \
+curl -X "POST" "https://api.day.app/your_key" \
   -H 'Content-Type: application/json; charset=utf-8' \
   -d '{
-    "title": "告警",
-    "subtitle": "系统监控",
-    "markdown": "CPU 使用率超过 90%",
+    "title": "Alert",
+    "subtitle": "System Monitor",
+    "markdown": "CPU usage over 90%",
     "level": "critical",
     "sound": "alarm",
     "badge": 5,
@@ -100,41 +100,41 @@ curl -X "POST" "https://api.day.app/你的key" \
   }'
 ```
 
-## 参数说明
+## Parameter Reference
 
-| 参数 | 类型 | 说明 |
-|------|------|------|
-| `title` | string | 通知标题 |
-| `subtitle` | string | 通知副标题 |
-| `body` | string | 纯文本内容 |
-| `markdown` | string | Markdown 内容（优先级更高） |
-| `level` | string | 中断级别：`critical`, `active`, `timeSensitive`, `passive` |
-| `sound` | string | 通知铃声 |
-| `badge` | number | 角标数字 |
-| `icon` | string | 图标 URL（未指定时使用 BARK_ICON 默认值） |
-| `image` | string | 图片 URL |
-| `group` | string | 通知分组（未指定时使用 BARK_GROUP 默认值） |
-| `url` | string | 点击跳转的 URL |
-| `copy` | string | 指定复制的文本 |
-| `isArchive` | number | 是否保存到历史（1=保存） |
-| `id` | string | 通知 ID（相同 ID 可更新通知） |
-| `delete` | string | 删除通知（1=删除，需搭配 id） |
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `title` | string | Notification title |
+| `subtitle` | string | Notification subtitle |
+| `body` | string | Plain text content |
+| `markdown` | string | Markdown content (higher priority than body) |
+| `level` | string | Interrupt level: `critical`, `active`, `timeSensitive`, `passive` |
+| `sound` | string | Notification sound |
+| `badge` | number | Badge number |
+| `icon` | string | Icon URL (uses BARK_ICON default if not specified) |
+| `image` | string | Image URL |
+| `group` | string | Notification group (uses BARK_GROUP default if not specified) |
+| `url` | string | URL to open when tapped |
+| `copy` | string | Custom copyable text |
+| `isArchive` | number | Save to history (1=save) |
+| `id` | string | Notification ID (same ID updates notification) |
+| `delete` | string | Delete notification (1=delete, requires id) |
 
-## 常见问题
+## FAQ
 
-### Q: 通知没有声音？
+### Q: No notification sound?
 
-检查 `level` 参数，设置为 `critical` 可在静音模式下响铃。
+Check the `level` parameter. Set to `critical` for sound in silent mode.
 
-### Q: 如何更新已发送的通知？
+### Q: How to update a sent notification?
 
-使用相同的 `id` 参数再次发送。
+Use the same `id` parameter when sending again.
 
-### Q: Markdown 不生效？
+### Q: Markdown not working?
 
-确保 `markdown` 参数存在，它会覆盖 `body` 内容。
+Ensure the `markdown` parameter exists - it overrides the `body` content.
 
-## 相关链接
+## Links
 
-- [Bark 官方文档](https://bark.day.app/)
+- [Bark Documentation](https://bark.day.app/)
 - [Bark GitHub](https://github.com/Finb/Bark)

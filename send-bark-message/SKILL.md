@@ -38,7 +38,7 @@ BARK_GROUP="MyApp"
 ```markdown
 ### Bark Push
 - base_url: https://api.day.app
-- key: 你的Bark设备key
+- key: your_Bark_device_key
 ```
 
 **Option 2: Environment variables**
